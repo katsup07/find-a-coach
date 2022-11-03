@@ -13,6 +13,21 @@ export default {
   components: {
     TheHeader,
   },
+  // auto login user via retrieving local storage data that was stored in previous session.
+  created(){
+    this.$store.dispatch('tryLogin');
+  }, 
+  computed: {
+    didAutoLogout(){
+      return this.$store.getters.didAutoLogout;
+    }
+  },
+  watch: {
+    didAutoLogout(curValue, oldValue){
+      if(curValue && curValue !== oldValue)
+        this.$router.replace('/coaches');
+    }
+  }
 };
 </script>
 

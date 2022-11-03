@@ -1,6 +1,7 @@
 export default {
  async registerCoach(context, { first, last, rate, desc, areas }) {
     const userId = context.rootGetters.userId;
+    console.log('userId: ', userId);
     const coachData = {
       firstName: first,
       lastName: last,
@@ -9,8 +10,9 @@ export default {
       areas,
     };
 
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://find-a-coach-f01cc-default-rtdb.asia-southeast1.firebasedatabase.app/coaches/${userId}.json`,
+      `https://find-a-coach-f01cc-default-rtdb.asia-southeast1.firebasedatabase.app/coaches/${userId}.json?auth=${token}`,
       {
         method: 'PUT',
         body: JSON.stringify(coachData),
@@ -18,7 +20,7 @@ export default {
     );
 
     await response.json();
-    if(!response.ok) console.log('Error occured when sending PUT request to server', response);
+    if(!response.ok) console.log('Error occurred when sending PUT request to server', response);
 
     context.commit('registerCoach', {...coachData, id: userId});
   },

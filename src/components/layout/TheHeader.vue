@@ -6,7 +6,11 @@
         <li>
           <router-link to="/coaches" class="active">All Coaches</router-link>
         </li>
-        <li><router-link to="/requests" class="{}">Requests</router-link></li>
+        <li><router-link to="/requests" v-if="isLoggedIn && isCoach">Requests</router-link></li>
+        <li>
+          <router-link to="/auth" class="active" v-if="!isLoggedIn">Login</router-link>
+        </li>
+        <li><router-link to="/" v-if="isLoggedIn" @click="logout">Logout</router-link></li>
       </ul>
     </nav>
   </header>
@@ -14,9 +18,25 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      isAuth: false,
+    }
   },
-};
+  computed: {
+    isLoggedIn(){
+    return this.$store.getters.isAuthenticated;
+  },
+  isCoach(){
+    return this.$store.getters['coaches/isCoach'];
+  }
+},
+methods: {
+  logout(){
+    this.$store.dispatch('logout');
+    this.$router.replace('/coaches');
+  }
+}
+}
 </script>
 
 <style scoped>

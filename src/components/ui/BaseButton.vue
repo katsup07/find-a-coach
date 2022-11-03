@@ -83,6 +83,20 @@ a.router-link-active {
   color: white;
 }
 
+.flat {
+  background: #ffffff;
+  color: black;
+  border: 1px solid rgb(205, 205, 205);
+}
+
+.flat:hover,
+.flat:active,
+button.green:active,
+button.green:hover,
+a.router-link-active {
+background: #b4b4b47c;
+}
+
 .disable{
   background: grey;
   cursor:not-allowed;

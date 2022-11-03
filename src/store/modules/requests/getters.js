@@ -6,5 +6,5 @@ export default{
   },
   hasRequests(state, getters){
     return getters.getRequests && getters.getRequests.length > 0;
-  }
+  },
 }

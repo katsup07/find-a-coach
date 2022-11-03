@@ -12,8 +12,15 @@
             :mode="'green'"
             :link="true"
             to="/register"
-            v-if="!isCoach && !isLoading"
+            v-if="isLoggedIn && !isCoach && !isLoading "
             >Register as Coach</base-button
+          >
+          <base-button
+            :mode="'green'"
+            :link="true"
+            to="/auth?redirect=register"
+            v-else-if="!isLoggedIn"
+            >Login to Register as Coach</base-button
           >
         </div>
         <div class="coach-cards">
@@ -83,6 +90,9 @@ export default {
     isCoach() {
       return this.$store.getters['coaches/isCoach'];
     },
+    isLoggedIn(){
+      return this.$store.getters.isAuthenticated;
+    }
   },
   created() {
     this.loadCoaches();
