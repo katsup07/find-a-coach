@@ -1,5 +1,5 @@
 # find-a-coach
-An app for finding coaches and listing yourself as a coach
+An app for finding coaches and listing yourself as a coach.
 ## Project setup
 ```
 npm install
